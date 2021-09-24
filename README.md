@@ -13,6 +13,8 @@ The platform implicates the aplication of nested forms and a testing series.
 
 ## Ruby Gems
 
+For the nested forms:
+
 * gem 'cocoon'. More information available at: https://github.com/nathanvda/cocoon
 * gem 'jquery-rails'
 * gem 'devise'. More information available at: https://github.com/heartcombo/devise
