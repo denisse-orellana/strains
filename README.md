@@ -1,11 +1,21 @@
-# README
+# Strains Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Strains is an exercise of Desafio Latam for the Rails and JavaScript development module and part of the Ruby and Rails backend career.
 
-Things you may want to cover:
+The challenge is based on Peter, the client, that wants to implement a sistem involving the elaboration of wines with diverse strains proportions. 
 
-* Ruby version
+The platform impicate the aplication of nested forms and a testing series.
+
+## Ruby version 
+
+* Ruby 2.6.1
+* Rails 5.2.4
+
+## Ruby Gems
+
+gem 'cocoon'. More information available at: https://github.com/nathanvda/cocoon
+gem 'jquery-rails'
+gem 'devise'. More information available at: https://github.com/heartcombo/devise
 
 * System dependencies
 
