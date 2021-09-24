@@ -1,0 +1,36 @@
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Peter's wines</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+                <li class="nav-item active">
+                    <%= link_to 'Wines', wines_path, class: "text-link"%>&nbsp</p>
+                </li>
+                <li class="nav-item active">
+                    <p><%= link_to 'Strains', strains_path, class: "text-link"%>&nbsp</p>
+                </li>
+                <li class="nav-item active">
+                    <p><%= link_to 'Oenologist', oenologists_path, class: "text-link"%>&nbsp</p>
+                </li>
+                <li class="nav-item active">
+                    <p><%= link_to 'Edit Account', edit_user_registration_path, class: "text-link"%>&nbsp</p>
+                </li>  
+                <li class="nav-item active">
+                    <p><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "text-link"%>&nbsp</p>
+                </li>
+            <% else %>
+                <li class="nav-item active">
+                    <p><%= link_to 'Log In', new_user_session_path, class: "text-link"%>&nbsp</p>
+                </li>
+                <li class="nav-item active">
+                    <p><%= link_to 'Sign Up', new_user_registration_path, class: "text-link"%>&nbsp</p>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+  </div>

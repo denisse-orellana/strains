@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <h1>Strains</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @strains.each do |strain| %>
+        <tr>
+          <td><%= strain.name %></td>
+          <td><%= link_to strain do %><i class="far fa-eye fa-2x"></i><% end %></td>
+          <td><%= link_to edit_strain_path(strain) do %><i class="far fa-edit fa-2x"></i><% end %></td>
+          <td><%= link_to strain, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="far fa-trash-alt fa-2x"></i><% end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Strain', new_strain_path %>
+  
+</div>
+
+
+
+

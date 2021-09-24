@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <h1>Oenologists</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Country</th>
+        <th>Workplace</th>
+        <th>Writer</th>
+        <th>Editor</th>
+        <th>Reviewer</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @oenologists.each do |oenologist| %>
+        <tr>
+          <td><%= oenologist.name %></td>
+          <td><%= oenologist.age %></td>
+          <td><%= oenologist.country %></td>
+          <td><%= oenologist.workplace %></td>
+          <td><%= oenologist.writer %></td>
+          <td><%= oenologist.editor %></td>
+          <td><%= oenologist.reviewer %></td>
+          <td><%= link_to oenologist do %><i class="far fa-eye fa-2x"></i><% end %></td>
+          <td><%= link_to edit_oenologist_path(oenologist) do %><i class="far fa-edit fa-2x"></i><% end %></td>
+          <td><%= link_to oenologist, method: :delete, data: { confirm: 'Are you sure?' } do %><i class="far fa-trash-alt fa-2x"></i><% end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Oenologist', new_oenologist_path %>
+
+</div>
+
+
+

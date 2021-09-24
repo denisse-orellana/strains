@@ -1,0 +1,10 @@
+<div class="field">
+    <%= f.label :strain_id %>
+    <%# f.select :strain_id, options_for_select(@strains) %>
+    <%= f.collection_select :strain_id, @strains, :id, :name %>
+</div>
+
+<div class="field">
+    <%= f.label :percent %>
+    <%= f.number_field :percent %>
+</div>
