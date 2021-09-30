@@ -9,6 +9,9 @@ class Wine < ApplicationRecord
 
     accepts_nested_attributes_for :comments, reject_if: :all_blank, allow_destroy: true
 
+    # You can add nested attributes in one line:
+    # accepts_nested_attributes_for :blends, :comments, reject_if: :all_blank, allow_destroy: true
+
     default_scope { order('wines.name ASC') }
 end
 

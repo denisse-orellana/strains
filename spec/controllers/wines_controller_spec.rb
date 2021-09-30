@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'rspec/rails'
 require 'devise'
-# require 'devise' goes after 'rspec/rails'
+# require 'devise' needs to be after 'rspec/rails'
 
 RSpec.describe WinesController, type: :controller do
 
