@@ -1,4 +1,4 @@
-# Strains Challenge
+# Strains
 
 This project implements a sistem that covers the elaboration of wines with diverse strains proportions. The platform implicates the aplication of nested forms and a testing series.
 
