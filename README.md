@@ -338,7 +338,7 @@ wines/_form_edit.html.erb
 </div>
 ```
 
-Now the Oenologist's score could be added to the wine when the Admin would edit the wine. To be seen from the Wine Index we add:
+Now the Oenologist's score could be added to the wine when the Admin edited the wine. To be seen from the Wine Index we add:
 
 ```
 wines/index.html.erb
@@ -461,14 +461,6 @@ The controller is test in the Wines spec:
 spec/controllers/wines_controller_spec.rb
 
 describe 'GET index' do
-    
-    # it 'assigns @wines' do
-    #     wine = Wine.create
-    #     wines = Wine.all
-    #     get :index
-    #     expect(assigns(:wines)).to eq(wine)
-    # end
-
     it "routes to #index" do
         get :index
         expect(get: "/wines").to route_to("wines#index")
@@ -492,9 +484,7 @@ describe 'GET show' do
         wine = Wine.create
         get :show, params: { id: wine.id }
         expect(response.status).to eq(302)
-        # expect(response).to have_http_status(302)
     end
-
 end
 ```  
 
