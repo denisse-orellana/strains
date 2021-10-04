@@ -70,3 +70,5 @@ gem 'cocoon'
 gem 'jquery-rails'
 # Flexible authentication solution for Rails. Readm more: https://github.com/heartcombo/devise
 gem 'devise'
+# It allows you to easily generate a diagram based on your application's Active Record models. Read more: https://github.com/voormedia/rails-erd
+gem 'rails-erd', group: :development

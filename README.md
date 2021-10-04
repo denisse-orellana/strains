@@ -39,6 +39,12 @@ For the testing series:
 * gem 'rspec-rails'. More information available at: https://github.com/rspec/rspec-rails
 * gem 'rails-controller-testing'
 
+## Diagram model
+
+The next flowchart describes the final Strains domain model:
+
+![strains](/app/assets/images/strains_domain_model.png)
+
 ## First Part
 
 ### 1. Making the model and controllers
