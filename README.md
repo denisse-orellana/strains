@@ -2,9 +2,10 @@
 
 This project implements a sistem that covers the elaboration of wines with diverse strains proportions. The platform implicates the aplication of nested forms and a testing series.
 
-- [Strains Challenge](#strains-challenge)
+- [Strains](#strains)
   * [Ruby version](#ruby-version)
   * [Ruby Gems](#ruby-gems)
+  * [Diagram model](#diagram-model)
   * [First Part](#first-part)
     + [1. Making the model and controllers](#1-making-the-model-and-controllers)
     + [2. Developing the Nested form](#2-developing-the-nested-form)
