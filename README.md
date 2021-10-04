@@ -20,7 +20,7 @@ For the testing series:
 * gem 'rspec-rails'. More information available at: https://github.com/rspec/rspec-rails
 * gem 'rails-controller-testing'
 
-## Part One
+## First Part
 
 ### 1. Making the model and controllers
 
@@ -139,6 +139,8 @@ _blend_fields.html.erb
 Finally, in the partial of the form is added the following:
 
 ```
+wines/_form.html.erb
+
 <div class="field">
     <%= form.fields_for :blends do |ff| %>
       <%= render 'blend_fields', f: ff %>
@@ -149,6 +151,8 @@ Finally, in the partial of the form is added the following:
     <%= link_to_add_association 'Add another Strain', form, :blends %>
 </div>
 ```
+
+Now we can add a Strain from the new form of wines.
 
 #### 2.3. Wines Index
 
@@ -179,3 +183,68 @@ In the model of Wine is added the default scope to keep an alphabetical order of
 ```
 default_scope { order('wines.name ASC') }
 ```
+
+## Second Part
+
+### Part I
+
+#### 1. User authentication
+
+The Gem Devise is incorporated to the Gemfile:
+
+```
+gem 'devise'
+```
+
+The install command is run in the terminal:
+
+```
+rails generate devise:install
+```
+
+The User is generated:
+
+```
+rails g devise User
+```
+
+Then, the helper is added in WinesController to set up user authentication:
+
+```
+controllers/wines_controller.rb
+
+before_action :authenticate_user!
+```
+
+#### 2. Admin authorization
+
+An admin attribute is added to User, since only the admin can make new wine blends.
+
+```
+rails g migration addAdminToUser admin:boolean
+```
+
+This method is implemented in WinesController for the admin authorization:
+
+```
+controllers/wines_controller.rb
+
+before_action :not_admin, except: [ :index ]
+
+def not_admin
+    redirect_to root_path, alert: "You can only watch Peter's wines" and return if !current_user.admin
+end
+```
+
+### Part II
+
+#### 1. Oenologist model
+
+#### 2. Database of the Oenologists
+
+#### 3. Admin authorization
+
+### Part III
+
+#### 1. Testing the model Strain
+#### 2. Testing the controller Wine
