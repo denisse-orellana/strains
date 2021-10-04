@@ -462,6 +462,16 @@ require 'rspec/rails'
 require 'devise'
 ```
 
+Then, this also will be needed for devise: 
+
+```
+spec/rails_helper.rb
+
+RSpec.configure do |config|
+  config.include Devise::Test::ControllerHelpers, type: :controller
+end
+```
+
 The controller is test in the Wines spec:
 
 ```
