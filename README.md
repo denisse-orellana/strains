@@ -20,6 +20,8 @@ For the testing series:
 * gem 'rspec-rails'. More information available at: https://github.com/rspec/rspec-rails
 * gem 'rails-controller-testing'
 
+## Part One
+
 ### 1. Making the model and controllers
 
 The Strain and Wine models are generated with scaffold while the Blend model will contain the associations between them.
@@ -53,7 +55,7 @@ class Blend < ApplicationRecord
 end
 ```
 
-* In the rails console is checked:
+* In the rails console can be checked as:
 
 ```
 Strain.new.wines
@@ -62,9 +64,95 @@ Blend.new.wine
 Blend.new.strains
 ```
 
-### 2. Wines Index
+### 2. Developing the Nested form
 
-The wine name 
+#### 2.1. Gems Install
+
+First step: add the gems Coccon and jQuery Rails to the Gemfile.
+
+```
+gem 'cocoon'
+gem 'jquery-rails'
+```
+
+The install command is run in the terminal:
+
+```
+rails g cocoon:install
+```
+
+To compile the asset pipeline is added:
+
+```
+application.js
+
+//= require jquery3
+//= require cocoon
+```
+
+#### 2.2. Model associations 
+
+The models are associated as it follows:
+
+```
+class Wine < ApplicationRecord
+    has_many :blends
+    has_many :strains, through: :blends, dependent: :destroy
+
+    accepts_nested_attributes_for :blends, reject_if: :all_blank, allow_destroy: true
+end
+```
+
+In the WinesController the nested attributes are incorporated.
+
+```
+controllers/wines_controller.rb
+
+# GET /wines/new
+def new
+    @wine = Wine.new
+    @strains = Strain.all
+    @wine.blends.build
+end
+
+def wine_params
+    params.require(:wine).permit(:name, { blends_attributes: [:id, :percent, :strain_id] })
+end
+```
+
+Also, a new partial is generated for the new fields and it contains:
+
+```
+_blend_fields.html.erb
+
+<div class="field">
+    <%= f.label :strain_id %>
+    <%= f.collection_select :strain_id, @strains, :id, :name %>
+</div>
+
+<div class="field">
+    <%= f.label :percent %>
+    <%= f.number_field :percent %>
+</div>
+```
+
+Finally, in the partial of the form is added the following:
+
+```
+<div class="field">
+    <%= form.fields_for :blends do |ff| %>
+      <%= render 'blend_fields', f: ff %>
+    <% end %>
+  </div>
+
+<div class="field">
+    <%= link_to_add_association 'Add another Strain', form, :blends %>
+</div>
+```
+
+#### 2.3. Wines Index
+
+The attributes of percent and strain are added to the Index:
 
 ```
 wines/index.html.erb
@@ -86,7 +174,7 @@ wines/index.html.erb
 
 ### 3. Wines Scope
 
-In the model of Wine the scope to keep an alphabetical order of the wines list.
+In the model of Wine is added the default scope to keep an alphabetical order of the wines list.
 
 ```
 default_scope { order('wines.name ASC') }
