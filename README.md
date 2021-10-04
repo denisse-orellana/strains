@@ -462,7 +462,7 @@ require 'rspec/rails'
 require 'devise'
 ```
 
-Then, this also will be needed for devise: 
+Then, this helper also will be needed for devise: 
 
 ```
 spec/rails_helper.rb
