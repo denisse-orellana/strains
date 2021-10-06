@@ -52,7 +52,7 @@ The next flowchart describes the final Strains domain model:
 
 The Strain and Wine models are generated with scaffold while the Blend model will contain the associations between them.
 
-```
+```console
 rails g scaffold Strain name
 rails g scaffold Wine name
 rails g model Blend strain:references wine:references percent:integer
@@ -60,21 +60,21 @@ rails g model Blend strain:references wine:references percent:integer
 
 The relation is described in the models as it follows:
 
-```
+```ruby
 class Strain < ApplicationRecord
     has_many :blends
     has_many :wines, through: :blends, dependent: :destroy
 end
 ```
 
-```
+```ruby
 class Wine < ApplicationRecord
     has_many :blends
     has_many :strains, through: :blends, dependent: :destroy
 end
 ```
 
-```
+```ruby
 class Blend < ApplicationRecord
   belongs_to :wine
   belongs_to :strain
@@ -83,7 +83,7 @@ end
 
 * In the rails console can be checked as:
 
-```
+```console
 Strain.new.wines
 Wine.new.strains
 Blend.new.wine
@@ -96,20 +96,20 @@ Blend.new.strains
 
 First step: add the gems Coccon and jQuery Rails to the Gemfile.
 
-```
+```ruby
 gem 'cocoon'
 gem 'jquery-rails'
 ```
 
 The install command is run in the terminal:
 
-```
+```console
 rails g cocoon:install
 ```
 
 To compile the asset pipeline is added:
 
-```
+```ruby
 application.js
 
 //= require jquery3
@@ -120,7 +120,7 @@ application.js
 
 The models are associated as it follows:
 
-```
+```ruby
 class Wine < ApplicationRecord
     has_many :blends
     has_many :strains, through: :blends, dependent: :destroy
@@ -131,7 +131,7 @@ end
 
 In the WinesController the nested attributes are incorporated.
 
-```
+```ruby
 controllers/wines_controller.rb
 
 # GET /wines/new
@@ -148,7 +148,7 @@ end
 
 Also, a new partial is generated for the new fields and it contains:
 
-```
+```ruby
 _blend_fields.html.erb
 
 <div class="field">
@@ -164,7 +164,7 @@ _blend_fields.html.erb
 
 Finally, in the partial of the form is added the following:
 
-```
+```ruby
 wines/_form.html.erb
 
 <div class="field">
@@ -184,7 +184,7 @@ Now we can add a Strain with a certain proportion of wines from the new form of 
 
 The attributes of percent and strain are added to the Index:
 
-```
+```ruby
 wines/index.html.erb
 
  <tbody>
@@ -206,7 +206,7 @@ wines/index.html.erb
 
 In the model of Wine is added the default scope to keep an alphabetical order of the wines list.
 
-```
+```ruby
 default_scope { order('wines.name ASC') }
 ```
 
@@ -218,25 +218,25 @@ default_scope { order('wines.name ASC') }
 
 The Gem Devise is incorporated to the Gemfile:
 
-```
+```ruby
 gem 'devise'
 ```
 
 The install command is run in the terminal:
 
-```
+```console
 rails generate devise:install
 ```
 
 The User is generated:
 
-```
+```console
 rails g devise User
 ```
 
 Then, the helper is added in WinesController to set up user authentication:
 
-```
+```ruby
 controllers/wines_controller.rb
 
 before_action :authenticate_user!
@@ -246,13 +246,13 @@ before_action :authenticate_user!
 
 An admin attribute is added to User, since only the admin can make new wine blends.
 
-```
+```console
 rails g migration addAdminToUser admin:boolean
 ```
 
 This method is implemented in WinesController for the admin authorization:
 
-```
+```ruby
 controllers/wines_controller.rb
 
 before_action :not_admin, except: [ :index ]
@@ -266,7 +266,7 @@ end
 
 The Oenologist is generated with scaffold while the Comment model will contain the associations between them.
 
-```
+```console
 rails g scaffold Oenologist name age:integer country workplace writer:boolean editor:boolean reviewer:boolean
 rails g migration addOenologistToWine oenologist:references
 rails g model Comment wine:references oenologist:references score:integer
@@ -274,14 +274,14 @@ rails g model Comment wine:references oenologist:references score:integer
 
 Now, to the models it is added: 
 
-```
+```ruby
 class Oenologist < ApplicationRecord
     has_many :comments
     has_many :wines, through: :comments, dependent: :destroy
 end
 ```
 
-```
+```ruby
 class Wine < ApplicationRecord
     has_many :comments
     has_many :oenologists, through: :comments, dependent: :destroy
@@ -290,7 +290,7 @@ class Wine < ApplicationRecord
 end
 ```
 
-```
+```ruby
 class Comment < ApplicationRecord
   belongs_to :wine
   belongs_to :oenologist
@@ -299,7 +299,7 @@ end
 
 In the WinesController it is incorporated:
 
-```
+```ruby
 controllers/wines_controller.rb
 
 def edit
@@ -315,7 +315,7 @@ end
 
 The new partial for Comment is made:
 
-```
+```ruby
 wines/_comment_fields.html.erb
 
 <div class="field">
@@ -331,7 +331,7 @@ wines/_comment_fields.html.erb
 
 A new partial for the edit is made and it will contain:
 
-```
+```ruby
 wines/_form_edit.html.erb
 
 <div class="field">
@@ -347,7 +347,7 @@ wines/_form_edit.html.erb
 
 Now the Oenologist's score could be added to the wine when the Admin edited the wine. To be seen from the Wine Index we add:
 
-```
+```ruby
 wines/index.html.erb
 
 <td>
@@ -368,7 +368,7 @@ wines/index.html.erb
 
 Finally, the scope for order by the Oenologist's age is added:
 
-```
+```ruby
 class Oenologist < ApplicationRecord
     default_scope { order('oenologists.age ASC') }
 end
@@ -376,12 +376,12 @@ end
 
 * In the rails console the functionality of the relations can be checked:
 
-```
+```console
 Oenologist.new.wines
 Wine.new.oenologists
 ```
 
-```
+```console
 Comment.new.wine
 Comment.new.oenologist
 ```
@@ -392,26 +392,26 @@ Comment.new.oenologist
 
 The gems are added to the Gemfile and installed as it follows:
 
-```
+```ruby
 group :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
 end
 ```
 
-```
+```console
 rails g rspec:install
 ```
 
 The test for the model is generated:
 
-```
+```console
 rails g rspec:model Strain
 ```
 
 The model is test in the Strain spec:
 
-```
+```ruby
 spec/models/strain_spec.rb
 
   context "Testing the strains first" do
@@ -440,7 +440,7 @@ end
 
 This testing is checked with the next command in the terminal:
 
-```
+```console
 bundle exec rspec spec/models/strain_spec.rb
 ```
 
@@ -448,13 +448,13 @@ bundle exec rspec spec/models/strain_spec.rb
 
 The test for the controller is generated:
 
-```
+```console
 rails g rspec:controller Wine
 ```
 
 First, this specifications are needed for the devise authentication:
 
-```
+```ruby
 spec/controllers/wines_controller_spec.rb
 
 require 'rails_helper'
@@ -464,7 +464,7 @@ require 'devise'
 
 Then, this helper also will be needed for devise: 
 
-```
+```ruby
 spec/rails_helper.rb
 
 RSpec.configure do |config|
@@ -474,7 +474,7 @@ end
 
 The controller is test in the Wines spec:
 
-```
+```ruby
 spec/controllers/wines_controller_spec.rb
 
 describe 'GET index' do
@@ -507,6 +507,6 @@ end
 
 Finally, this testing is checked with the next command in the terminal:
 
-```
+```console
 bundle exec rspec spec/controllers/wines_controller_spec.rb
 ```
