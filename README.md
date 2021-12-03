@@ -101,12 +101,6 @@ gem 'cocoon'
 gem 'jquery-rails'
 ```
 
-The install command is run in the terminal:
-
-```console
-rails g cocoon:install
-```
-
 To compile the asset pipeline is added:
 
 ```ruby
